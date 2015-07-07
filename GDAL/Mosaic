@@ -1,0 +1,8 @@
+cd /projectnb/landsat/projects/CMS_Mexico/images/020048/images/4910line
+
+module load gdal/1.10.0
+module load batch_landsat
+
+imglist=$(find . -name 'L*line')
+
+gdal_merge.py -o line_mosaic -of ENVI -co "INTERLEAVE=BIP" $imglist
