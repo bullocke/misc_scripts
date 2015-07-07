@@ -3,7 +3,7 @@
 
 """Rasterize a segmentation image vector
 Usage:
-  Rasterize.py <filename>
+  Rasterize.py <filename> <output>
 """
 
 from docopt import docopt
@@ -17,7 +17,7 @@ if __name__ == '__main__':
 
 
 name = args['<filename>']
-
+output = args['<output>']
 
 pixel_size=30
 orig_data_source = ogr.Open(name)
@@ -37,7 +37,7 @@ x_res = int((x_max - x_min) / pixel_size)
 y_res = int((y_max - y_min) / pixel_size)
 numBands=len(features)
 # Write MultiBand Raster
-final_ds = gdal.GetDriverByName('GTiff').Create('Stack.tif', x_res, y_res, numBands, gdal.GDT_Int32)
+final_ds = gdal.GetDriverByName('GTiff').Create(output, x_res, y_res, numBands, gdal.GDT_Int32)
 final_ds.SetGeoTransform((x_min, pixel_size, 0, y_max, 0, -pixel_size))
 final_ds.SetProjection(source_srs.ExportToWkt())
 bandNum = 0
