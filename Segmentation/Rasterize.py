@@ -21,7 +21,6 @@ output = args['<output>']
 
 pixel_size=30
 orig_data_source = ogr.Open(name)
-BandNum='Band1'
 # Make a copy of the layer's data source because we'll need to
 # modify its attributes table
 source_ds = ogr.GetDriverByName("Memory").CopyDataSource(
