@@ -1,9 +1,26 @@
+#!/usr/bin/env python
+# -*- coding: UTF-8 -*-
+
+"""Rasterize a segmentation image vector
+Usage:
+  Rasterize.py <filename>
+"""
+
+from docopt import docopt
 import gdal
 import numpy as np
 from osgeo import ogr
 
+
+if __name__ == '__main__':
+    args = docopt(__doc__, version='0.1.0')
+
+
+name = args['<filename>']
+
+
 pixel_size=30
-orig_data_source = ogr.Open("Vector.shp")
+orig_data_source = ogr.Open(name)
 BandNum='Band1'
 # Make a copy of the layer's data source because we'll need to
 # modify its attributes table
