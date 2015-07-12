@@ -29,6 +29,8 @@ source_layer = source_ds.GetLayer(0)
 source_srs = source_layer.GetSpatialRef()
 
 #Iterate over features
+#TODO: Find these features automatically, right now the bands are hard coded
+
 features=['meanB0', 'meanB1', 'meanB2', 'meanB3', 'meanB4', 'meanB5', 'meanB6', 'varB0', 'varB1', 'varB2', 'varB3', 'varB4', 'varB5', 'varB6']
 x_min, x_max, y_min, y_max = source_layer.GetExtent()
 # Create the destination data source
