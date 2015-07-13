@@ -27,11 +27,16 @@ source_ds = ogr.GetDriverByName("Memory").CopyDataSource(
         orig_data_source, "")
 source_layer = source_ds.GetLayer(0)
 source_srs = source_layer.GetSpatialRef()
+layerDefinition = source_layer.GetLayerDefn()
 
 #Iterate over features
-#TODO: Find these features automatically, right now the bands are hard coded
-
-features=['meanB0', 'meanB1', 'meanB2', 'meanB3', 'meanB4', 'meanB5', 'meanB6', 'varB0', 'varB1', 'varB2', 'varB3', 'varB4', 'varB5', 'varB6']
+features=[]
+for i in range(layerDefinition.GetFieldCount()):
+    if layerDefinition.GetFieldDefn(i).GetName().startswith( 'mean' ):
+        features.append(layerDefinition.GetFieldDefn(i).GetName())
+for i in range(layerDefinition.GetFieldCount()):
+    if layerDefinition.GetFieldDefn(i).GetName().startswith( 'var' ):
+        features.append(layerDefinition.GetFieldDefn(i).GetName())
 x_min, x_max, y_min, y_max = source_layer.GetExtent()
 # Create the destination data source
 x_res = int((x_max - x_min) / pixel_size)
