@@ -24,7 +24,7 @@ def save_raster(array, path, dst_filename, nbands):
     x_pixels = array.shape[1]  # number of pixels in x
     y_pixels = array.shape[0]  # number of pixels in y
     driver = gdal.GetDriverByName('GTiff')
-    dataset = driver.Create(dst_filename,x_pixels, y_pixels,nbands,gdal.GDT_Int32)
+    dataset = driver.Create(dst_filename,x_pixels, y_pixels,nbands,gdal.GDT_Byte)
     dataset.GetRasterBand(1).WriteArray(array[:,:])
     geotrans=example.GetGeoTransform() 
     proj=example.GetProjection() 
